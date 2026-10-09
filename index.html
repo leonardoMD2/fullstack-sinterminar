@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My FastAPI App</h1>
+    <script>
+        fetch('http://localhost:8000/obtener_estudiantes')
+            .then(response => response.json())
+            .then(data => {
+                renderData(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            function renderData(data){
+                
+                const container = document.getElementById('data-container');
+                data.forEach(item => {
+                    const div = document.createElement('div');
+                    const img = document.createElement('img');
+                    img.src = item.img;
+                    img.alt = `${item.nombre} ${item.apellido}`;
+                    div.appendChild(img);
+                    div.textContent = `ID: ${item.id}, Name: ${item.nombre}, Age: ${item.apellido}`;
+                    container.appendChild(div);
+                });
+            }
+    </script>
+
+    <div id="data-container"></div>
+</body>
+</html>
